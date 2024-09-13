@@ -61,3 +61,13 @@ variable "managed_group_desired_size" {
 variable "cluster_admin_access" {
   type = bool
 }
+
+variable "jump_server_ami" {
+  type = string
+}
+variable "jump_server_instance_type" {
+  type = string
+}
+variable "jump_server_name" {
+  type=string
+}
