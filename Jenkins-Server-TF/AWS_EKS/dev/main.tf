@@ -1,3 +1,6 @@
+terraform {
+  backend "s3" {}
+}
 provider "aws" {
   region = var.region
 }
@@ -31,13 +34,13 @@ module "eks" {
   pod_identity_agent_version = var.pod_identity_agent_version
 }
 
-module "jump_server"{
-source = "../module/ec2"
-instance_type = var.jump_server_instance_type
-ami = var.jump_server_ami
-name = var.jump_server_name
-subnet_id = module.vpc.vpc_private_subnets[0]
-vpc_security_group_ids = module.vpc.vpc_default_security_group
+module "jump_server" {
+  source                 = "../module/ec2"
+  instance_type          = var.jump_server_instance_type
+  ami                    = var.jump_server_ami
+  name                   = var.jump_server_name
+  subnet_id              = module.vpc.vpc_private_subnets[0]
+  vpc_security_group_ids = module.vpc.vpc_default_security_group
 }
 
 

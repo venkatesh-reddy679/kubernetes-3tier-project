@@ -69,5 +69,14 @@ variable "jump_server_instance_type" {
   type = string
 }
 variable "jump_server_name" {
-  type=string
+  type = string
+}
+variable "s3_bucket_name" {
+  type = string
+}
+variable "path_to_store_statefile" {
+  type = string
+}
+variable "dynamoDB_table_name" {
+  type = string
 }
