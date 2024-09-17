@@ -40,7 +40,7 @@ module "jump_server" {
   ami                    = var.jump_server_ami
   name                   = var.jump_server_name
   subnet_id              = module.vpc.vpc_private_subnets[0]
-  vpc_security_group_ids = module.vpc.vpc_default_security_group
+  vpc_security_group_ids = [module.vpc.vpc_default_security_group]
 }
 
 
