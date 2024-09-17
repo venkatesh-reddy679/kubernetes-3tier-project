@@ -27,7 +27,7 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
   role = aws_iam_role.ec2_service_role.name
 }
 resource "aws_security_group" "sg-jump-server" {
-   vpc_id = var.vpc_id
+   vpc_id = var.vpc_ID
    egress {
     from_port = 0
     to_port = 0
@@ -35,7 +35,7 @@ resource "aws_security_group" "sg-jump-server" {
     cidr_blocks = ["0.0.0.0/0"]
    }
    tags={
-     "name"="jump-server-sg"
+     "Name"="jump-server-sg"
    }
 }
 
