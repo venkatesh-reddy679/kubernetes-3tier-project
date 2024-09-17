@@ -49,6 +49,6 @@ module "ec2-instance" {
   iam_instance_profile=aws_iam_instance_profile.ec2_instance_profile.name
   instance_type = var.instance_type
   subnet_id = var.subnet_id
-  vpc_security_group_ids = [aws_security_group.sg-jump-server]
+  vpc_security_group_ids = [aws_security_group.sg-jump-server.id]
   user_data = filebase64("${path.module}/user-data.sh")
 }
