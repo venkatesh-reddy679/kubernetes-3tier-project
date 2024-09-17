@@ -50,5 +50,5 @@ module "ec2-instance" {
   instance_type = var.instance_type
   subnet_id = var.subnet_id
   vpc_security_group_ids = [aws_security_group.sg-jump-server]
-  user_data = file("user-data.sh")
+  user_data = filebase64("./user-data.sh")
 }
