@@ -29,7 +29,7 @@ module "ec2-instance" {
   version = "5.7.0"
   name=var.name
   ami=var.ami
-  associate_public_ip_address=false
+  associate_public_ip_address=true
   create_iam_instance_profile = false
   iam_instance_profile=aws_iam_instance_profile.ec2_instance_profile.name
   instance_type = var.instance_type
