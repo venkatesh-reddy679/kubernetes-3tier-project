@@ -1,6 +1,9 @@
 data "aws_iam_policy" "admin_access" {
   name = "AdministratorAccess"
 }
+data "aws_iam_policy" "ssm"{
+  name =  "AmazonSSMManagedInstanceCore"
+}
 resource "aws_iam_role" "ec2_service_role" {
   name = "ec2_service_account_role"
 
@@ -17,11 +20,16 @@ resource "aws_iam_role" "ec2_service_role" {
       },
     ]
   })
-  managed_policy_arns = [data.aws_iam_policy.admin_access.arn]
+  managed_policy_arns = [data.aws_iam_policy.admin_access.arn, data.aws_iam_policy.ssm.arn]
 }
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
   name = "test_profile"
   role = aws_iam_role.ec2_service_role.name
+}
+module "security-group" {
+  source  = "terraform-aws-modules/security-group/aws"
+  version = "5.2.0"
+  vpc_id = 
 }
 
 module "ec2-instance" {
@@ -29,11 +37,11 @@ module "ec2-instance" {
   version = "5.7.0"
   name=var.name
   ami=var.ami
-  associate_public_ip_address=true
+  associate_public_ip_address=false
   create_iam_instance_profile = false
   iam_instance_profile=aws_iam_instance_profile.ec2_instance_profile.name
   instance_type = var.instance_type
   subnet_id = var.subnet_id
   vpc_security_group_ids = var.vpc_security_group_ids
-  user_data = base64encode("./user-data.sh")
+  user_data = file("./user-data.sh")
 }
