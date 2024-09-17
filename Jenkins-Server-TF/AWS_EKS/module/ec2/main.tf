@@ -26,10 +26,17 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
   name = "test_profile"
   role = aws_iam_role.ec2_service_role.name
 }
-module "security-group" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "5.2.0"
-  vpc_id = 
+resource "aws_security_group" "sg-jump-server" {
+   vpc_id = var.vpc_id
+   egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+   }
+   tags={
+     "name"="jump-server-sg"
+   }
 }
 
 module "ec2-instance" {
@@ -42,6 +49,6 @@ module "ec2-instance" {
   iam_instance_profile=aws_iam_instance_profile.ec2_instance_profile.name
   instance_type = var.instance_type
   subnet_id = var.subnet_id
-  vpc_security_group_ids = var.vpc_security_group_ids
+  vpc_security_group_ids = [aws_security_group.sg-jump-server]
   user_data = file("./user-data.sh")
 }
