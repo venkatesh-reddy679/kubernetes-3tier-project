@@ -1,0 +1,70 @@
+properties([
+    parameters([
+        string(defaultValue: 'dev', name: 'environment'), choice(choices: ['plan', 'apply', 'destroy'], name: 'terraform_action')
+        ])
+    ])
+    
+pipeline{
+    agent any
+    tools{
+        terraform 'terraform'
+    }
+    environment{
+        terraform_home=tool 'terraform'
+    }
+    stages{
+        stage("git clone"){
+            steps{
+                script{
+                     sh "echo cloning GIT repository"
+                     git branch: 'main', url: 'https://github.com/venkatesh-reddy679/kubernetes-3tier-project.git'
+                }
+            }
+        }
+        stage("terraform init"){
+            steps{
+                script{
+                    withAWS(credentials: 'venky-IAM', region: 'us-east-1') {
+                        dir("Jenkins-Server-TF/AWS_EKS/${params.environment}") {
+                            sh "${terraform_home}/terraform init -backend-config='./backend-config.tfvars'"
+                        }
+                    }
+
+                }
+            }
+        }
+        stage("terraform validate"){
+            steps{
+                script{
+                    dir("Jenkins-Server-TF/AWS_EKS/${params.environment}") {
+                        sh "${terraform_home}/terraform validate"
+                    }
+                }
+                
+            }
+        }
+        stage("terraform action"){
+            steps{
+                script{
+                    dir("Jenkins-Server-TF/AWS_EKS/${params.environment}") {
+                        withAWS(credentials: 'venky-IAM', region: 'us-east-1') {
+                            if(params.terraform_action == "plan"){
+                                sh "${terraform_home}/terraform plan -var environment=${params.environment} -out=terraformplan.txt"
+                            }
+                            else if(params.terraform_action == "apply"){
+                                sh "${terraform_home}/terraform apply -var environment=${params.environment} -auto-approve"
+                            }
+                            else if(params.terraform_action == "destroy"){
+                                sh "${terraform_home}/terraform destroy -var environment=${params.environment} -auto-approve"
+                            }
+                            else{
+                                error 'something  wrong with terraform action'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
