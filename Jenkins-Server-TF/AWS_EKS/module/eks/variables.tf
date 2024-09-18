@@ -26,9 +26,7 @@ variable "pod_identity_agent_version" {
 variable "kube_proxy_version" {
   type=string
 }
-variable "aws_eks_kms_alias"{
-  type = string
-}
+
 variable "vpc_cni_version" {
   type = string
 }
