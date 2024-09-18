@@ -32,7 +32,6 @@ module "eks" {
   managed_group_max_size     = var.managed_group_max_size
   instance_types             = var.instance_types
   pod_identity_agent_version = var.pod_identity_agent_version
-  aws_eks_kms_alias = var.aws_eks_kms_alias
 }
 
 module "jump_server" {
