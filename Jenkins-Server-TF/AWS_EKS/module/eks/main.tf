@@ -67,6 +67,7 @@ module "eks" {
   authentication_mode = var.authentication_mode
   create_iam_role = false
   iam_role_arn = aws_iam_role.AWS_EKS_ROLE.arn
+  kms_key_aliases = ["eks01"]
   cluster_addons = {
     coredns                = {
       version=var.coreDNS_version
