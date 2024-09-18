@@ -1,12 +1,12 @@
 region                     = "us-east-1"
 availability_zone          = ["us-east-1c", "us-east-1d", "us-east-1f"]
-nameOfVPC                  = "vpc11"
+nameOfVPC                  = "vpc-tf-argocd"
 environment                = "dev"
-vpc_cidr                   = "10.10.0.0/16"
-public_subnet_cidr         = ["10.10.1.0/24", "10.10.2.0/24", "10.10.3.0/24"]
-private_subnet_cidr        = ["10.10.4.0/24", "10.10.5.0/24", "10.10.6.0/24"]
+vpc_cidr                   = "10.20.0.0/16"
+public_subnet_cidr         = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
+private_subnet_cidr        = ["10.20.4.0/24", "10.20.5.0/24", "10.20.6.0/24"]
 eks_cluster_name           = "eks-01"
-cluster_admin_access       = false
+cluster_admin_access       = true
 ami_type                   = "AL2023_x86_64_STANDARD"
 instance_types             = ["m5.xlarge"]
 eks_cluster_version        = "1.27"
