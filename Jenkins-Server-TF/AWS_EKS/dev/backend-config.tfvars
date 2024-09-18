@@ -1,4 +1,4 @@
-    bucket         = "tfstate-dev-01"
+    bucket         = "tfstate-dev-01-11"
     key            = "terraform/state"
-    region         = "us-west-1"
+    region         = "us-east-2"
     dynamodb_table = "dev-state-lock-table"
