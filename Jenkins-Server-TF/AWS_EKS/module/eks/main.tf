@@ -57,17 +57,6 @@ output "cluster-endpoint" {
   value = module.eks.cluster_endpoint
 }
 
-resource "aws_kms_key" "eks_key" {
-  description             = "New KMS key for EKS encryption"
-  deletion_window_in_days = 7
-  key_usage               = "ENCRYPT_DECRYPT"
-}
-
-resource "aws_kms_alias" "eks_alias" {
-  name          = var.aws_eks_kms_alias
-  target_key_id = aws_kms_key.eks_key.id
-}
-
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0"
@@ -100,13 +89,6 @@ module "eks" {
   create_cluster_security_group = true
   openid_connect_audiences=["sts.amazonaws.com"]
   create_kms_key = false
-  cluster_encryption_config = [{
-    resources = ["secrets"]
-    provider  = {
-      key_arn = aws_kms_key.eks_key.arn
-    }
-  }]
-
   eks_managed_node_groups = {
     example = {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
