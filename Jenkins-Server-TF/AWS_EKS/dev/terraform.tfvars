@@ -1,5 +1,5 @@
 region                     = "us-east-2"
-availability_zone          = ["us-east-2a", "us-east-2b",""us-east-2c]
+availability_zone          = ["us-east-2a", "us-east-2b","us-east-2c"]
 nameOfVPC                  = "vpc-tf-argocd"
 environment                = "dev"
 vpc_cidr                   = "10.20.0.0/16"
