@@ -23,7 +23,7 @@ resource "aws_iam_role" "ec2_service_role" {
   managed_policy_arns = [data.aws_iam_policy.admin_access.arn, data.aws_iam_policy.ssm.arn]
 }
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
-  name = "test_profile"
+  name = "ec2_profile"
   role = aws_iam_role.ec2_service_role.name
 }
 resource "aws_security_group" "sg-jump-server" {
