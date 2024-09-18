@@ -1,5 +1,5 @@
-region                     = "us-east-1"
-availability_zone          = ["us-east-1c", "us-east-1d", "us-east-1f"]
+region                     = "us-west-1"
+availability_zone          = ["us-west-1c", "us-west-1d", "us-west-1f"]
 nameOfVPC                  = "vpc-tf-argocd"
 environment                = "dev"
 vpc_cidr                   = "10.20.0.0/16"
@@ -23,4 +23,4 @@ jump_server_name           = "jump_server"
 dynamoDB_table_name        = "dev-state-lock-table"
 s3_bucket_name             = "dev-env-tfstate00"
 path_to_store_statefile    = "terraform/dev/state"
-aws_eks_kms_alias = "alias/aws_eks_secret_key"
+
