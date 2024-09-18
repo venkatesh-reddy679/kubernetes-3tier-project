@@ -1,10 +1,10 @@
-region                     = "us-west-1"
-availability_zone          = ["us-west-1a", "us-west-1b"]
+region                     = "us-east-2"
+availability_zone          = ["us-east-2a", "us-east-2b",""us-east-2c]
 nameOfVPC                  = "vpc-tf-argocd"
 environment                = "dev"
 vpc_cidr                   = "10.20.0.0/16"
-public_subnet_cidr         = ["10.20.1.0/24", "10.20.2.0/24"]
-private_subnet_cidr        = ["10.20.4.0/24", "10.20.5.0/24"]
+public_subnet_cidr         = ["10.20.1.0/24", "10.20.2.0/24", "10.20.3.0/24"]
+private_subnet_cidr        = ["10.20.4.0/24", "10.20.5.0/24","10.20.36.0/24"]
 eks_cluster_name           = "eks-tf"
 cluster_admin_access       = true
 ami_type                   = "AL2023_x86_64_STANDARD"
