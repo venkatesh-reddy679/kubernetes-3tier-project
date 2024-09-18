@@ -3,7 +3,6 @@ kind: StorageClass
 metadata:
   name: sc-aws
 provisioner: ebs.csi.aws.com
-volumeBindingMode: Immediate
 reclaimPolicy: Delete
 parameters:
   type: gp2
