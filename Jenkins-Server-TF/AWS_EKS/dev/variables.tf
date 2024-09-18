@@ -80,6 +80,4 @@ variable "path_to_store_statefile" {
 variable "dynamoDB_table_name" {
   type = string
 }
-variable "aws_eks_kms_alias"{
-  type = string
-}
+
