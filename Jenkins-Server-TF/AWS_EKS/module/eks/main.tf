@@ -88,7 +88,6 @@ module "eks" {
   create_node_security_group = true
   create_cluster_security_group = true
   openid_connect_audiences=["sts.amazonaws.com"]
-  create_kms_key = false
   eks_managed_node_groups = {
     example = {
       # Starting on 1.30, AL2023 is the default AMI type for EKS managed node groups
