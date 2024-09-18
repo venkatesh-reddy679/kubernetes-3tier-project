@@ -99,12 +99,13 @@ module "eks" {
   create_node_security_group = true
   create_cluster_security_group = true
   openid_connect_audiences=["sts.amazonaws.com"]
-  encryption_config {
-    provider {
+  create_kms_key = false
+  cluster_encryption_config = [{
+    resources = ["secrets"]
+    provider  = {
       key_arn = aws_kms_key.eks_key.arn
     }
-    resources = ["secrets"]
-  }
+  }]
 
   eks_managed_node_groups = {
     example = {
