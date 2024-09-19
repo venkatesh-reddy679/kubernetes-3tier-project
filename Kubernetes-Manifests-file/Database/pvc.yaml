@@ -4,7 +4,7 @@ metadata:
   name: mongo-volume-claim
   namespace: three-tier
 spec: 
-  storageClassName: sc-aws
+  storageClassName: gp2
   accessModes:  
     - ReadWriteOnce
   resources:
