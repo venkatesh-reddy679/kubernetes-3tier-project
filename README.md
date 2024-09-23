@@ -4,17 +4,19 @@
 
 ## step 1: deploying EKS cluster on AWS using Terraform and Jenkins pipeline
 
+### Note: Refer to the folders in jenkins-server/AWS_EKS. A seperate folder named dev  with terraform configuration files is used to have a seperate terraform.tfstate file for each environment like dev, test, and prod. To deploy infrastructure in another environment like test or prod using the same terraform configuration, clone the dev folder with a specific name, update the terraform.tfvars and backed-config.tfvars with values accordingly and execute the terrafrom commands from that specific folder. Make sure to update the environment same as the terraform configuration folder name while running the jenkins pipeline
+
 By following modular approach, derived terraform configuration files to 
 
-(pass the inputs in terraform.tfvars, and backend-config.tfvars in **Jenkins-Server-TF/AWS_EKS/dev** folder)
-
--> use AWS S3 backend to store the resource state information. created an s3 bucket and dynamodb table for state locking and passed the information in the file **Jenkins-Server-TF/AWS_EKS/dev/backend-config.tfvars**
+-> use AWS S3 backend to store the resource state information. created an s3 bucket and dynamodb table manually for state locking and passed the information in the file **Jenkins-Server-TF/AWS_EKS/dev/backend-config.tfvars**
 
 -> create a vpc with three public and three private subnets in three availability zones
    
 -> an EKS cluster with AWS managed node group which is accessible only from within the cluster which will be deployed only in private subnets
 
 -> a jump server with ssh-key based authentication disabled. connect to the jump server using sessions manager. Installing the required tools like aws cli, eksctl, helm, and kubectl by passing the start-up script to the jump server using file **Jenkins-Server-TF/AWS_EKS/module/ec2/user-data.sh**
+
+(pass the inputs in terraform.tfvars, and backend-config.tfvars in **Jenkins-Server-TF/AWS_EKS/dev** folder)
 
 ### settign up the jenkins server with required tools
 
@@ -110,6 +112,25 @@ commands to install trivy:
 5. sudo apt-get install -y trivy
 
 ![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/3fa2a8d8-ef9a-4f9e-b01e-85f366867b6c)
+
+### jenkins pipeline to deploy EKS cluster
+
+1. stored AWS access key ID and secret access key in the jekins global credentials section
+
+   ![image](https://github.com/user-attachments/assets/b094dc43-7582-403b-b064-db016d4d57c9)
+
+2. making the pipeline parametarized to capture the environment and terraform action from the user. Tools block is used specify  the tools to use in the pipeline. jenkins server will install the specified tool on the machine where the pipeline is executed. Tool function is used to fetch the path where the specified tool is installed. so environment block is used to get the path where terraform is installed and store the path in an environment variable
+
+   ![image](https://github.com/user-attachments/assets/77c329e0-6d91-4923-8d3f-87c1b40978ba)
+
+3. terraform doestn't allow us to use the variable while defining the terraform backend like s3. so, to pass the s3 backend parameters like bucket name, key, region and dynamodb table name, we store those parameters in a seperate tf.vars file and we pass that file during terraform init. withAWS block authenticates the jenkins server with the AWS api using the aws credentials stored.
+
+   ![image](https://github.com/user-attachments/assets/11c33bc3-cdde-4e39-9083-9cdf24b4cdf9)
+
+
+   
+
+
 
 
 
