@@ -208,6 +208,23 @@ It is a good practice to wrap "waitForQualityGate" in a "timeout" block to preve
 
 ## step 3: install ALB ingress controller and argoCD in the eks cluster
 
+1. connect to the jump server using sessions manager and verify kubectl, aws cli, eksctl and helm is installed
+
+   ![image](https://github.com/user-attachments/assets/fd2f9136-5239-4a10-9364-fe5ed8ee578e)
+
+2. run aws configure command to authenticate with AWS api and update the kubeconfig file and verify
+
+   ![image](https://github.com/user-attachments/assets/f1020273-e9d5-456a-9a40-333e84b2f2e4)
+
+3. verify that the security groups associated with eks cluster is allowing incoming traffic
+
+   ![image](https://github.com/user-attachments/assets/a3fcc23f-c343-47fd-95e6-018c1e7b9d0a)
+
+4. follow the offical documentation to install ALB ingress controller [](https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html)
+
+
+   
+
 
 
 
