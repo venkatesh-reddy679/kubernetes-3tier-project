@@ -11,8 +11,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules: 
-    - host: venky.io/learn
-      http:
+    - http:
         paths:
           - path: /api
             pathType: Prefix
