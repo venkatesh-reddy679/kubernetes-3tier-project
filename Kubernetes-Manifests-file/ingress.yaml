@@ -11,7 +11,7 @@ metadata:
 spec:
   ingressClassName: alb
   rules: 
-    - host: k8s-threetie-mainlb-d6f34925d4-590987568.us-east-2.elb.amazonaws.com
+    - host: venky.io/learn
       http:
         paths:
           - path: /api
