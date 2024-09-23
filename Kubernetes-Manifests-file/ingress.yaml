@@ -45,6 +45,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: frontend.three-tier.svc.cluster.local
+                name: frontend
                 port:
                   number: 3000
