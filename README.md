@@ -139,6 +139,12 @@ to run the pipeline, click on build with parameters and specify the environment 
 
 ![image](https://github.com/user-attachments/assets/16c90fc2-5dc5-44de-be4d-2c463ab06373)
 
+![image](https://github.com/user-attachments/assets/30cc7dd5-7c9c-4fa8-9d6d-03ae574dcf13)
+
+![image](https://github.com/user-attachments/assets/14804c2e-e260-40ab-89c5-b8e2c488419a)
+
+
+
 
 
 
