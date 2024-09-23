@@ -192,6 +192,22 @@ It is a good practice to wrap "waitForQualityGate" in a "timeout" block to preve
 
 ![image](https://github.com/user-attachments/assets/91260f38-e4a3-466b-98b1-29b9418b0302)
 
+3. Stage to scan the directory after cloning the git repository for any known vulenrabilities using trivy that writes the output in table format to a file specified in -o flag and . represents current directory. OWASP (Open Web Application Security Project) provides tools and resources to improve software security. One of its key features is the OWASP Dependency-Check, which scans project dependencies for known vulnerabilities and weaknesses. It helps identify risks in libraries or modules used by your applications, enabling you to address security issues early in the development process. This tool is essential for maintaining secure and compliant software by keeping dependencies up-to-date and mitigating potential threats.
+
+   ![image](https://github.com/user-attachments/assets/b5008a1b-304a-4c52-8afe-daa91f123d04)
+
+4. stage to build the docker image, scane the docker image using trivy, and push the docker images to a private repository hosted on AWS ECR registry.
+
+   ![image](https://github.com/user-attachments/assets/365feb46-c788-4347-b3b5-e977989ec6ae)
+
+5. updating the image in the deployment file and pusing the changes to the same git repository. stored a git personal access token in the jenkins global credentials, and used envronment block to define environment variables to store the git token, repository name, and username.
+
+   ![image](https://github.com/user-attachments/assets/d24e9f0c-ab04-44a8-80b9-559a24c8644f)
+
+
+
+
+
 
 
 
