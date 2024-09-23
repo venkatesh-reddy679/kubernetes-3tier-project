@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: dtaabase-volume
+  namespace: three-tier
+spec:
+  storageClassName: ebs-csi-driver-storage
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
