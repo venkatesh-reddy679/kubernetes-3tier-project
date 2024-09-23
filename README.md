@@ -4,10 +4,14 @@
 
 # step 1: deploying EKS cluster on AWS using Terraform and Jenkins pipeline
 
-1. By following modular approach, derived terraform configuration files to
+By following modular approach, derived terraform configuration files to
 
-    -> use AWS S3 backend to store the resource state information
+    -> use AWS S3 backend to store the resource state information. created an s3 bucket and dynamodb table for state locking and passed the information in the file **Jenkins-Server-TF/AWS_EKS/dev/backend-config.tfvars**
+   
    -> create a vpc with three public and three private subnets in three availability zones
-   an EKS cluster with AWS managed node group which is accessible only from within the cluster which will be deployed only in private subnets, and a jump server with ssh-key based authentication disabled. please refer to the folder **Jenkins-Server-TF/AWS_EKS**
+   
+   -> an EKS cluster with AWS managed node group which is accessible only from within the cluster which will be deployed only in private subnets
+
+   -> a jump server with ssh-key based authentication disabled. connect to the jump server using sessions manager. Installing the required tools like aws cli, eksctl, helm, and kubectlpasing the start-up script to the jump server using file **Jenkins-Server-TF/AWS_EKS/module/ec2/user-data.sh**
 
 
