@@ -4,7 +4,9 @@
 
 # step 1: deploying EKS cluster on AWS using Terraform and Jenkins pipeline
 
-By following modular approach, derived terraform configuration files to (pass the inputs in terraform.tfvars, and backend-config.tfvars in dev folder)
+By following modular approach, derived terraform configuration files to 
+
+(pass the inputs in terraform.tfvars, and backend-config.tfvars in Jenkins-Server-TF/AWS_EKS/dev folder)
 
 -> use AWS S3 backend to store the resource state information. created an s3 bucket and dynamodb table for state locking and passed the information in the file **Jenkins-Server-TF/AWS_EKS/dev/backend-config.tfvars**
 
