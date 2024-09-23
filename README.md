@@ -123,9 +123,24 @@ commands to install trivy:
 
    ![image](https://github.com/user-attachments/assets/77c329e0-6d91-4923-8d3f-87c1b40978ba)
 
-3. terraform doestn't allow us to use the variable while defining the terraform backend like s3. so, to pass the s3 backend parameters like bucket name, key, region and dynamodb table name, we store those parameters in a seperate tf.vars file and we pass that file during terraform init. withAWS block authenticates the jenkins server with the AWS api using the aws credentials stored.
+3. terraform doestn't allow us to use the variable while defining the terraform backend like s3. so, to pass the s3 backend parameters like bucket name, key, region and dynamodb table name, we store those parameters in a seperate .tfvars file and  pass that file during terraform init. withAWS block authenticates the jenkins server with the AWS api using the aws credentials stored. **terraform init** command intializes the s3 backend, install the modules, and download the provider plugin.
 
    ![image](https://github.com/user-attachments/assets/11c33bc3-cdde-4e39-9083-9cdf24b4cdf9)
+
+4. terraform validate command validate the terraform configuration for any syntax errors or configuration erorrs
+
+   ![image](https://github.com/user-attachments/assets/54fa32c1-9bf6-4bb3-bf62-f8207d5d0094)
+
+4. usign the parameter fetched from user like plan, apply, destroy, this stage runs the terraform plan or terraform apply or terraform destroy.
+
+   ![image](https://github.com/user-attachments/assets/b8bc5ae2-d64f-4315-b609-940a59753636)
+
+to run the pipeline, click on build with parameters and specify the environment and terrafomr action
+
+![image](https://github.com/user-attachments/assets/16c90fc2-5dc5-44de-be4d-2c463ab06373)
+
+
+
 
 
    
