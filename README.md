@@ -16,7 +16,7 @@ By following modular approach, derived terraform configuration files to
 
 -> a jump server with ssh-key based authentication disabled. connect to the jump server using sessions manager. Installing the required tools like aws cli, eksctl, helm, and kubectl by passing the start-up script to the jump server using file **Jenkins-Server-TF/AWS_EKS/module/ec2/user-data.sh**
 
-### settign up the jenkins server
+### settign up the jenkins server 
 
 A Jenkins server is an automation tool used for continuous integration (CI) and continuous delivery (CD) in software development. It helps automate the process of building, testing, and deploying code changes, ensuring that code quality is maintained and deployment is consistent. Jenkins integrates with various tools and platforms through plugins, supports defining workflows as code, and can scale across multiple machines to handle large workloads. It is widely used to improve development efficiency and ensure early detection of issues.
 setup:
@@ -75,6 +75,26 @@ To use the third-party tools installed as plugins in the jenkins pipelines, Conf
 ![image](https://github.com/user-attachments/assets/316ef025-5547-4274-a2b1-30388712d7e6)
 ![image](https://github.com/user-attachments/assets/2ebc56f5-99d1-451f-adf5-898df1aed1cb)
 ![image](https://github.com/user-attachments/assets/4974f49f-8f06-4757-809c-d8e23ec888a8)
+
+SonarQube is an open-source platform used for continuous inspection of code quality through static code analysis, detecting bugs, code smells, and security vulnerabilities across more than 25 programming languages. It provides detailed metrics and reports, integrates seamlessly with CI/CD tools like Jenkins, and allows customization of coding rules to enforce standards. By using SonarQube, development teams can improve code quality, maintainability, and security, receive continuous feedback, and ensure compliance with coding best practices, making it an essential tool for maintaining high standards in software development projects.
+
+Sonarqube-scanner plugin performs the code quality analysis, generates the reports, and publish the reports to the configured sonarqube server.
+
+setup: (running the sonarqube server on the same jenkins server as a docker container and publishing the service on port 9000 of the host)
+![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/14e01a58-5c9d-4b53-9dcc-9a15f61d6e68)
+![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/efbbf27c-0e65-4951-900f-b7a78574644a)
+default username: admin && default password: admin
+
+steps to configure the sonarqube server in Jenkins:
+
+1. create a security token in the sonarqube server. go to -> administration -> security -> users (choose the user  you want to authenticatse as) -> click on tokens & generate a new token and save it somewhere
+![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/7b913052-6394-4c0e-9260-bf3aba162c10)
+
+2. store the generated security token in the global credentials as a "secret text" in Jenkins server. go to manage jenkins -> credentials -> click on global & click on add credentials
+![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/ac65c3e5-bfce-4a00-916f-84391c55b2d3)
+
+3. configure the sonarqube server in jenkins server. go to manage jenkins -> system and scroll to sonarqube server settings.
+![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/18453c27-699a-4f54-a388-16b5421b7082)
 
 
 
