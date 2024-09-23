@@ -232,6 +232,20 @@ It is a good practice to wrap "waitForQualityGate" in a "timeout" block to preve
 
    ![image](https://github.com/user-attachments/assets/8769b74a-a128-44e5-bee8-b680da22655c)
 
+6. install ebs csi driver in the eks cluster using helm to create a storage class that dynamically provisions the persistent storage from AWS ElasticBlockStorage
+
+   helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+
+   helm repo update
+
+   helm upgrade --install aws-ebs-csi-driver --namespace kube-system aws-ebs-csi-driver/aws-ebs-csi-driver
+
+   ![image](https://github.com/user-attachments/assets/ffef7473-2d59-40e5-9c88-357098a5c7be)
+
+### step 4: create ArgoCD app-of-apps application to deploy the resources in eks cluster
+
+
+
    
 
 
