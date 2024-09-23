@@ -143,6 +143,54 @@ to run the pipeline, click on build with parameters and specify the environment 
 
 ![image](https://github.com/user-attachments/assets/14804c2e-e260-40ab-89c5-b8e2c488419a)
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## step 2: jenkins pipelines for frontend and backend applications
+
+refer to the jenkins files available in the folder Jenkins-Pipeline-Code. all of the stages are same for both the pipelines with minor changes. so, only frontend pipeline is explained in this section
+
+1. pipeline is parametarized to get the region from user. Tool function is used to get the path where jenkins installed the specified tool and credentials function is used to retrieve the secret texts stored in jenkins global credentials. using environment block, specified environment variables to store the path of sonar-scanner tool, to store the aws account ID , and to construct the awe ecr registry url. stages are added to clean the workspace and clone the git repository
+
+   ![image](https://github.com/user-attachments/assets/d91dec4f-3c98-470c-ad5a-b968e340c7f0)
+
+2. Stage for code quality check and quality gate
+
+first, create projects in sonarqube server for frontend and backend applicatin source code analysis
+
+![image](https://github.com/user-attachments/assets/e5c5c656-7e43-447c-98e5-622a1050a411)
+
+choose to analyse the project locally
+
+![image](https://github.com/user-attachments/assets/fd8b8c7d-d288-451b-9c99-4d8343aa56f1)
+
+use the created administrator uer token whcih can be used to analyse multiple projects
+
+![image](https://github.com/user-attachments/assets/4313e85c-ac78-41a9-a4ab-5233429513f4)
+
+choose what programming languages is used in application and what operating system we are going to perform the source code analysis. copy the sonar-scanner command
+
+
+![image](https://github.com/user-attachments/assets/a8f9d61c-9267-436f-82e5-eb16f928000e)
+
+
+withSonarQubeEnv('sonarqube-server') block sets up the environemnt for sonarqube code quality analysis. The maven command "mvn sonar:sonar" triggers the SonarQube analysis for a Maven-based project, sending the analysis data to a SonarQube server.
+
+A Quality Gate in sonarqube server is a set of conditions that a project must meet to be considered of acceptable quality. It is a way to enforce a minimum standard of quality before changes are integrated into the main codebase. These conditions can include metrics like code coverage, number of bugs, code smells, duplications, and other issues.
+
+![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/5e4c8999-ad0f-45fb-bf38-8df5dc5d4a61)
+
+"sonar way" is the default quality gate our project points to. we can a new quality gate with different coverage level by clicking on create button. To set our project to use a customized quality gate, got to project -> project settings -> quality gate -> always use a specific quality gate -> choose the gate
+
+![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/6556d90a-e0a9-46d8-86e0-bf17c6e86b5f)
+
+"waitForQualityGate" step waits until the sonarqube analysis is completed and sonarqube server send the quality gate status to jenkins server  using the webhook that we set on sonarqube server and "abortPipeline: true" will abort the pipeline if the quality gate is failed.
+
+It is a good practice to wrap "waitForQualityGate" in a "timeout" block to prevent the build from waiting indefinitely in case of issues with SonarQube analysis. The timeout block will limit the maximum time the build waits for the Quality Gate status. If the timeout expires before the quality gate status is received, the pipeline will throw a timeout error. If the quality gate status is received before the timeout expired, waitForQualityGate will be passed and pipeline execution will be resumed.
+
+![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/e1f46ae7-affe-4248-ae8d-cfe80c1ea0cd)
+
+
+
 
 
 
