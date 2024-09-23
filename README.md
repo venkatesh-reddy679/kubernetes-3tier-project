@@ -2,5 +2,6 @@
 
 ![Three-Tier Banner](assets/Three-Tier.gif)
 
-Welcome to the Three-Tier Web Application Deployment project! 🚀
+# step 1: deploying EKS cluster on AWS using Terraform and Jenkins pipeline
+
 
