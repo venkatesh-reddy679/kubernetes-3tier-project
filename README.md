@@ -100,7 +100,7 @@ steps to configure the sonarqube server in Jenkins:
 
 **Trivy** is an open-source vulnerability scanner used to detect the known vulnerabilities in various components of software development such as docker images, file systems, git repositories and kubernetes clusers. It help us ensure that software is developed deployed with no existing issues.
 
-Jenkins doesn't provide any default plugin for trivy, so we have to manually install it on agent machine.
+Jenkins doesn't provide any default plugin for trivy, so we have to manually install it.
 
 commands to install trivy:
 1. sudo apt-get install wget apt-transport-https gnupg lsb-release
