@@ -222,6 +222,19 @@ It is a good practice to wrap "waitForQualityGate" in a "timeout" block to preve
 
 4. follow the offical documentation to install ALB ingress controller [AWS ALB Ingress](https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html)
 
+   ![image](https://github.com/user-attachments/assets/a0b723fa-3608-403a-aa46-f96617420185)
+
+5. install ArgoCD using helm chart. Modify the argocd service from clusterIP to LoadBalancer type for external access
+
+   kubectl create namespace argocd
+
+   kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+   ![image](https://github.com/user-attachments/assets/8769b74a-a128-44e5-bee8-b680da22655c)
+
+   
+
+
 
    
 
