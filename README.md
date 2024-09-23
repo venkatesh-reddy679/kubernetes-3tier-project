@@ -220,7 +220,7 @@ It is a good practice to wrap "waitForQualityGate" in a "timeout" block to preve
 
    ![image](https://github.com/user-attachments/assets/a3fcc23f-c343-47fd-95e6-018c1e7b9d0a)
 
-4. follow the offical documentation to install ALB ingress controller [](https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html)
+4. follow the offical documentation to install ALB ingress controller [AWS ALB Ingress](https://docs.aws.amazon.com/eks/latest/userguide/lbc-helm.html)
 
 
    
