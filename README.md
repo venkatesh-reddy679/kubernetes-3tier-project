@@ -173,6 +173,9 @@ choose what programming languages is used in application and what operating syst
 ![image](https://github.com/user-attachments/assets/a8f9d61c-9267-436f-82e5-eb16f928000e)
 
 
+![image](https://github.com/user-attachments/assets/92f6d029-5c8f-42e5-8132-8619c4c118a0)
+
+
 withSonarQubeEnv('sonarqube-server') block sets up the environemnt for sonarqube code quality analysis. The maven command "mvn sonar:sonar" triggers the SonarQube analysis for a Maven-based project, sending the analysis data to a SonarQube server.
 
 A Quality Gate in sonarqube server is a set of conditions that a project must meet to be considered of acceptable quality. It is a way to enforce a minimum standard of quality before changes are integrated into the main codebase. These conditions can include metrics like code coverage, number of bugs, code smells, duplications, and other issues.
@@ -187,7 +190,8 @@ A Quality Gate in sonarqube server is a set of conditions that a project must me
 
 It is a good practice to wrap "waitForQualityGate" in a "timeout" block to prevent the build from waiting indefinitely in case of issues with SonarQube analysis. The timeout block will limit the maximum time the build waits for the Quality Gate status. If the timeout expires before the quality gate status is received, the pipeline will throw a timeout error. If the quality gate status is received before the timeout expired, waitForQualityGate will be passed and pipeline execution will be resumed.
 
-![image](https://github.com/venkatesh-reddy679/Board_Game-CI-CD/assets/60383183/e1f46ae7-affe-4248-ae8d-cfe80c1ea0cd)
+![image](https://github.com/user-attachments/assets/91260f38-e4a3-466b-98b1-29b9418b0302)
+
 
 
 
