@@ -280,11 +280,54 @@ An argocd application is a resource that uses git repository and folder containi
 ![image](https://github.com/user-attachments/assets/d369571c-75ad-4690-8c2e-e565159a3b79)
 ![image](https://github.com/user-attachments/assets/51b38699-3518-4168-8ddb-a4a4f20458f9)
 
-once the ALB ingress controller cerates and configures the Application LoadBalancer, access it on the browser
+once the ALB ingress controller creates and configures the Application LoadBalancer, access it on the browser
 
 ![image](https://github.com/user-attachments/assets/f26ec426-4a32-4875-b031-09fa83f19d9e)
 ![image](https://github.com/user-attachments/assets/bb484594-6ed4-4158-a41b-c95b155598b1)
 ![image](https://github.com/user-attachments/assets/73af0c44-791e-46b7-a12d-ce04c9a94a9e)
+
+### Monitoring the eks cluster using prometheus and grafana
+
+Install Prometheus using helm chart
+
+![image](https://github.com/user-attachments/assets/874679dc-dec1-4f9a-ba5c-96da02eed7b6)
+
+edit the promethues service type from clusterIP to LoadBalancer to access it from internet
+
+![image](https://github.com/user-attachments/assets/64822436-339e-4ec1-8303-375ca1b55826)
+
+![image](https://github.com/user-attachments/assets/8274ed88-6cb2-4b9d-bd66-a01c20ea4749)
+
+
+Installing Grafana using helm chart
+
+![image](https://github.com/user-attachments/assets/f2fda6d7-46cb-4a5d-8a84-986505576910)
+
+edit the grafana service type from clusterIP to LoadBalancer
+![image](https://github.com/user-attachments/assets/394919a3-9a3a-44cf-984a-c8c8b36426d0)
+
+retrieve the grafana admin password from the secrete named grafana
+
+![image](https://github.com/user-attachments/assets/dfba779e-4e04-4057-8162-e215f42b6981)
+
+![image](https://github.com/user-attachments/assets/49ecbc40-2e80-46e2-9161-9543d54e61af)
+
+configuring prometheus as datasource for grafana
+
+![image](https://github.com/user-attachments/assets/4ed2d8a9-78bd-4116-abf6-d6cfbf6ec813)
+
+Grafana comes with lot of builtin dashboards to visualize prometheus metrics if we dont want to create dashboard from scratch
+
+![image](https://github.com/user-attachments/assets/0ce6c51a-4cc5-4b5f-b77b-01cf07672b26)
+![image](https://github.com/user-attachments/assets/71fbb26b-4915-4f4a-bd48-ead38f2536c6)
+![image](https://github.com/user-attachments/assets/d3c69ea5-47d2-4c30-8192-2bb22ac63c22)
+
+
+
+
+
+
+
 
 
 
