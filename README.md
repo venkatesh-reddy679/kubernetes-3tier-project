@@ -244,6 +244,56 @@ It is a good practice to wrap "waitForQualityGate" in a "timeout" block to preve
 
 ### step 4: create ArgoCD app-of-apps application to deploy the resources in eks cluster
 
+ArgoCD is an declerative, GitOps continous delivery tool which uses git repository as a single source of truth for ensuring that the desired state (state in git) matches with the live state (state in cluster). ArgoCD-repo-server polls the git repository for every 3 minutes by default and if it detects any changes in the desired state, then based on sync policy, it pulls the changes and applies the changes on cluster.
+
+refer to the Kubernetes-Manifests-file folder for frontend, backend, database and ingress yaml files.
+
+ALB ingress controller is already deployed and is running as a pod in the kube-systemt namepsace. Now, To enable external access to the application running within the cluster, we have to create an Ingress which is an namespaced kubernetes resource that configures the load-balancer to route traffic based on host-name and path.So, whenever we create an ingress resource, ALB contoller creates an Application Load Balancer, configures the target groups based on the rules specified in the ingress resource.
+
+**annotations to add for an ingress resource to create and configure ALB:**
+
+1. alb.ingress.kubernetes.io/scheme: internal/internet-facing
+2. alb.ingress.kubernetes.io/target-type: ip/instance -> we have to forward the incoming request to the ip of a pod, so value is ip
+3. alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+4. alb.ingress.kubernetes.io/subnets: provide the id of public subnetes where the loadbalancer should be deployed. provide comma seperated vallues
+
+In Kubernetes-Manifests-file folder, we have Ingress yaml definition file that creates an ingress resource in the three-tier namespace
+
+In Kubernetes-Manifests-file/Database folder, a secret yaml definition containing mongodb username, and password, a storage class yaml definition that user ebs.csi.aws.com provisioner to dynamically provision the persistent volume, and persistentvolumeclaim definition yaml defining the storageclass name, and requesting the storage required, and a deployment yaml that creates a single replica of mongoDB that uses this persistent volume to keep the data persistent, and finally a service yaml definition to expose the database for the backend over clusterIP.
+
+![image](https://github.com/user-attachments/assets/2358aa11-0778-4217-b22e-c0db46f722ca)
+
+In frontend and backend folders, respective deployment ans service yaml definition files are available.
+
+In this project, we are usign app-of-apps framework in argoCD where a single application will create, update, and delete other applications. ArgoCD application yaml file are avaialble in the folder **argocd**
+
+![image](https://github.com/user-attachments/assets/4bc874aa-eadd-45cc-80fb-d62c21e0f325)
+
+An argocd application is a resource that uses git repository and folder containing manifest files as source and cluster and namespace as destination. So, we create an appliction in argocd web UI that point to the argocd folder and deploys those argocd application yaml files in the argocd namespace.
+
+![image](https://github.com/user-attachments/assets/250c1c0e-ef38-4fd4-9107-19774806e755)
+![image](https://github.com/user-attachments/assets/24e9cc03-f110-44e5-91c2-274152dfa676)
+![image](https://github.com/user-attachments/assets/05fb11bf-58cb-42ad-b0c5-e2d3e66b82a0)
+![image](https://github.com/user-attachments/assets/18630fad-801d-4e01-9458-362d2716fb14)
+![image](https://github.com/user-attachments/assets/77835e97-2f1f-40bc-8b52-d3f97d36ba56)
+![image](https://github.com/user-attachments/assets/0201ed9e-ff0a-421d-81ed-c6a806b1d8d5)
+![image](https://github.com/user-attachments/assets/d369571c-75ad-4690-8c2e-e565159a3b79)
+![image](https://github.com/user-attachments/assets/51b38699-3518-4168-8ddb-a4a4f20458f9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
    
