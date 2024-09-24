@@ -280,6 +280,15 @@ An argocd application is a resource that uses git repository and folder containi
 ![image](https://github.com/user-attachments/assets/d369571c-75ad-4690-8c2e-e565159a3b79)
 ![image](https://github.com/user-attachments/assets/51b38699-3518-4168-8ddb-a4a4f20458f9)
 
+once the ALB ingress controller cerates and configures the Application LoadBalancer, access it on the browser
+
+![image](https://github.com/user-attachments/assets/f26ec426-4a32-4875-b031-09fa83f19d9e)
+![image](https://github.com/user-attachments/assets/bb484594-6ed4-4158-a41b-c95b155598b1)
+![image](https://github.com/user-attachments/assets/73af0c44-791e-46b7-a12d-ce04c9a94a9e)
+
+
+
+
 
 
 
